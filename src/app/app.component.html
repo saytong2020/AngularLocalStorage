@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <form #register="ngForm" (ngSubmit)="createUser(register)">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Name</label>
+          <input type="text" name="name" ngModel class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">User Name</label>
+          <input type="text" name="username" ngModel class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email</label>
+          <input type="email" name="email" ngModel class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Phone Number</label>
+          <input type="text" name="phone" ngModel class="form-control" id="exampleInputPassword1">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+
+
+<h2 class="bg-primary mt-5 p-3 text-white">User Infomation</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">User Name</th>
+      <th scope="col">Email </th>
+      <th scope="col">Phone </th>
+      <th scope="col">Action </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of eusers; let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{user['name']}}</td>
+      <td>{{user['username']}}</td>
+      <td>{{user['email']}}</td>
+      <td>{{user['phone']}}</td>
+      <td> <button (click)="deleteUser(i)" class="btn btn-danger">Delete</button> </td>
+      
+    </tr>
+   
+  </tbody>
+</table>
+
+
+</div>
+
+
+
+
+
+
+
