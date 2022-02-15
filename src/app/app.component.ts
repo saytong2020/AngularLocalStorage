@@ -14,14 +14,6 @@ export class AppComponent implements OnInit{
   }
 
 
-  isShowHide (){
-    if (this.isShowCard){
-      this.isShowCard = false;
-    }
-    else{
-      this.isShowCard = true;
-    }
-  }
   
   
 
