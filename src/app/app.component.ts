@@ -26,7 +26,7 @@ export class AppComponent implements OnInit{
   }
 
   onSubmit(form:FormGroup){
-    console.log(form.value.email);
+    console.log(form.value);
   }
 
   
