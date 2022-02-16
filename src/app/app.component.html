@@ -1,28 +1,30 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <form #register="ngForm" (ngSubmit)="createUser(register)">
+      <form [formGroup]="registerForm" (ngSubmit)="createUser()">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Name</label>
-          <input type="text" name="name" ngModel class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          
+          <input type="text" name="name" formControlName="name" ngModel class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div class="text-danger" *ngIf="registerForm.get('name').invalid && (registerForm.get('name').touched || registerForm.get('name').dirty)" > Please Enter Name</div>
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">User Name</label>
-          <input type="text" name="username" ngModel class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          
+          <input type="text" name="username" formControlName="username" ngModel class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div class="text-danger" *ngIf="registerForm.get('username').invalid && (registerForm.get('username').touched || registerForm.get('username').dirty)" > Please Enter User Name</div>
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email</label>
-          <input type="email" name="email" ngModel class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          
+          <input type="email" name="email" formControlName="email" ngModel class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div class="text-danger" *ngIf="registerForm.get('email').invalid && (registerForm.get('email').touched || registerForm.get('email').dirty)" > Please Enter Email</div>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Phone Number</label>
-          <input type="text" name="phone" ngModel class="form-control" id="exampleInputPassword1">
+          <input type="text" name="phone" formControlName="phone" ngModel class="form-control" id="exampleInputPassword1">
+          <div class="text-danger" *ngIf="registerForm.get('phone').invalid && (registerForm.get('phone').touched || registerForm.get('phone').dirty)" > Please Enter Phone</div>
+        
         </div>
         
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" [disabled]="registerForm.invalid"  class="btn btn-primary">Submit</button>
       </form>
     </div>
   </div>
