@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   
    registerForm:any;
 
+   isUpdate:boolean = false;
+
    constructor(private fb:FormBuilder){
      
    }
@@ -30,9 +32,9 @@ export class AppComponent implements OnInit {
       }
     );
 
-    let esers:any = localStorage.getItem("$user_info");
-    let users = JSON.stringify(esers);
-    //this.users = users;
+    let eusers:any = localStorage.getItem("$user_info");
+    let users = JSON.parse(eusers);
+    this.users = users;
     
    
    
@@ -43,22 +45,32 @@ export class AppComponent implements OnInit {
   createUser()
   {
 
-    console.log(this.registerForm.getRawValue());
+    if (this.isUpdate)
+    {
+      //Update
+    }
+    else
+    {
+      console.log(this.registerForm.getRawValue());
 
-    let userForm:any = this.registerForm.getRawValue();
-    let users:any = [];
+      let userForm:any = this.registerForm.getRawValue();
+      let users:any = [];
 
-    users = this.users;
+      users = this.users;
 
-    users.push(userForm);
+      users.push(userForm);
 
-    let user = JSON.stringify(users);
+      let user = JSON.stringify(users);
+      
+      localStorage.setItem("$user_info", user);
+
+      this.registerForm.reset();
+    }
+
     
-    localStorage.setItem("$user_info", user);
-
-    this.registerForm.reset();
   }
-    deleteUser(index:any){
+    deleteUser(index:any)
+    {
 
       // 1. get index 
       // 2. find items
@@ -72,5 +84,23 @@ export class AppComponent implements OnInit {
       localStorage.setItem("$user_info",JSON.stringify(this.users) );
       console.log(ind);
 
+    }
+
+    editUser(index:any)
+    {
+      
+      let user:any = this.users[index];
+      console.log(this.users[index]);
+
+      this.registerForm.patchValue({
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        phone: user.phone,
+      });
+
+      if (this.isUpdate){
+        this.isUpdate = true;
+      }
     }
 }
