@@ -43,13 +43,7 @@ export class AppComponent implements OnInit {
 
     if (this.isUpdate && this.isSelectedIdex != -1) 
     {
-      // let ind = this.users.indexOf(this.users[this.isSelectedIdex]);
-
-      // if (ind >-1){
-      //   this.users.splice(ind,1);
-      // }
-  
-
+      
       users = this.users;
 
       users.push(userForm);
