@@ -9,16 +9,18 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
 
-  
+
    users = [];
-  
+
    registerForm:any;
 
    isSelectedIdex:any = -1;
 
    isUpdate:boolean = false;
 
-   constructor(private fb:FormBuilder){  
+   SearchText:any;
+
+   constructor(private fb:FormBuilder){
    }
   ngOnInit() {
       this.registerForm = this.fb.group (
@@ -41,15 +43,15 @@ export class AppComponent implements OnInit {
     let userForm:any = this.registerForm.getRawValue();
     let users:any = [];
 
-    if (this.isUpdate && this.isSelectedIdex != -1) 
+    if (this.isUpdate && this.isSelectedIdex != -1)
     {
-      
+
       users = this.users;
 
       users.push(userForm);
 
       let user = JSON.stringify(users);
-      
+
       localStorage.setItem("$user_info", user);
 
       this.registerForm.reset();
@@ -62,24 +64,24 @@ export class AppComponent implements OnInit {
       if (ind >-1){
         this.users.splice(ind,1);
       }
-      
+
       users = this.users;
 
       users.push(userForm);
 
       let user = JSON.stringify(users);
-      
+
       localStorage.setItem("$user_info", user);
 
       this.registerForm.reset();
     }
 
-    
+
   }
     deleteUser(index:any)
     {
 
-      // 1. get index 
+      // 1. get index
       // 2. find items
 
 
