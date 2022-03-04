@@ -14,16 +14,14 @@ export class AppComponent implements OnInit {
   
    registerForm:any;
 
+   isSelectedIdex:any = -1;
+
    isUpdate:boolean = false;
 
-   constructor(private fb:FormBuilder){
-     
+   constructor(private fb:FormBuilder){  
    }
-
   ngOnInit() {
-
-
-    this.registerForm = this.fb.group (
+      this.registerForm = this.fb.group (
       {
         name: ['',Validators.required],
         username: ['',Validators.required],
@@ -35,27 +33,42 @@ export class AppComponent implements OnInit {
     let eusers:any = localStorage.getItem("$user_info");
     let users = JSON.parse(eusers);
     this.users = users;
-    
-   
-   
+
   }
-
-  
-
   createUser()
   {
+    console.log(this.registerForm.getRawValue());
+    let userForm:any = this.registerForm.getRawValue();
+    let users:any = [];
 
-    if (this.isUpdate)
+    if (this.isUpdate && this.isSelectedIdex != -1) 
     {
-      //Update
+      // let ind = this.users.indexOf(this.users[this.isSelectedIdex]);
+
+      // if (ind >-1){
+      //   this.users.splice(ind,1);
+      // }
+  
+
+      users = this.users;
+
+      users.push(userForm);
+
+      let user = JSON.stringify(users);
+      
+      localStorage.setItem("$user_info", user);
+
+      this.registerForm.reset();
     }
     else
     {
-      console.log(this.registerForm.getRawValue());
 
-      let userForm:any = this.registerForm.getRawValue();
-      let users:any = [];
+      let ind = this.users.indexOf(this.users[this.isSelectedIdex]);
 
+      if (ind >-1){
+        this.users.splice(ind,1);
+      }
+      
       users = this.users;
 
       users.push(userForm);
@@ -79,7 +92,7 @@ export class AppComponent implements OnInit {
       let ind = this.users.indexOf(this.users[index]);
 
       if (ind >-1){
-        this.users.splice(ind,1)
+        this.users.splice(ind,1);
       }
       localStorage.setItem("$user_info",JSON.stringify(this.users) );
       console.log(ind);
@@ -88,7 +101,7 @@ export class AppComponent implements OnInit {
 
     editUser(index:any)
     {
-      
+      this.isSelectedIdex = index;
       let user:any = this.users[index];
       console.log(this.users[index]);
 
